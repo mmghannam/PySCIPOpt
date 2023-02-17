@@ -43,6 +43,21 @@ jobs:
         run: |
           py.test
 
+  Conda-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Install dependencies (SCIPOptSuite)
+        run: |
+          conda install -y --channel conda-forge pyscipopt
+
+      - name: Run pyscipopt tests
+        run: |
+          py.test
+
   Windows-test:
     env:
       SCIPOPTDIR: C:\scipoptdir
