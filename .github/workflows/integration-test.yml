@@ -57,7 +57,7 @@ jobs:
 
       - name: Run pyscipopt tests
         run: |
-          py.test
+          pytest .
 
   Windows-test:
     env:
