@@ -49,10 +49,11 @@ jobs:
       fail-fast: true
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Install dependencies (SCIPOptSuite)
         run: |
           conda install -y --channel conda-forge pyscipopt
+          conda install -y pytest
 
       - name: Run pyscipopt tests
         run: |
