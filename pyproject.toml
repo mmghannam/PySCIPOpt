@@ -4,19 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [tool.cibuildwheel]
 before-all = [
-  "(apt-get update && apt-get install --yes git) || yum install -y git || brew install git",
-  "git clone --depth=1 https://github.com/sagemath/sage",
-  "cd sage",
-  "sed -i.bak /tail/s/72/1000/ build/bin/sage-logger",
-  "make configure",
-  "export PATH=build/bin:$PATH",
-  "eval $(sage-print-system-package-command auto update)",
-  "eval $(sage-print-system-package-command auto --yes --no-install-recommends --spkg install cmake zlib ncurses readline patch openblas gmp mpfr boost_cropped onetbb gfortran)",
-  "if brew --prefix; then . ./.homebrew-build-env; fi",
-  "./configure --enable-build-as-root --enable-fat-binary",
-  "make -j3 V=0 base-toolchain scip"
+  "conda create -n scipwheel",
+  "conda activate scipwheel",
+  "conda install -y -c conda-forge scip",
 ]
-environment = { PATH="$(pwd)/sage/local/bin:$PATH", LD_LIBRARY_PATH="$(pwd)/sage/local/lib:$LD_LIBRARY_PATH", PKG_CONFIG_PATH="$(pwd)/sage/local/lib/pkgconfig:$PKG_CONFIG_PATH", ACLOCAL_PATH="/usr/share/aclocal", SCIPOPTDIR="$(pwd)/sage/local" }
+environment = {"SCIPOPTDIR": "/opt/conda/envs/scipwheel"}
 build-frontend = "build"
 # OneTBB, as of version 2021.8.0, does not build on manylinux2014 - https://github.com/oneapi-src/oneTBB/issues/950
 # And manylinux_2_24 is EOL - https://github.com/pypa/manylinux#docker-images
