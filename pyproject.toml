@@ -8,7 +8,7 @@ before-all = [
   "conda activate scipwheel",
   "conda install -y -c conda-forge scip",
 ]
-environment = {"SCIPOPTDIR": "/opt/conda/envs/scipwheel"}
+environment = {LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="$CONDA_PREFIX"}
 build-frontend = "build"
 # OneTBB, as of version 2021.8.0, does not build on manylinux2014 - https://github.com/oneapi-src/oneTBB/issues/950
 # And manylinux_2_24 is EOL - https://github.com/pypa/manylinux#docker-images
