@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.cibuildwheel.linux]
 before-all = [
-  "apt-get install -y wget || yum install -y wget",
+  "apt-get install -y wget || yum install -y wget || brew install wget",
   "mkdir -p scip && cd scip && wget https://scipopt.org/download/release/SCIPOptSuite-8.0.3-Linux-debian.sh && chmod 700 * && echo \"y\" | ./*.sh && rm *.sh"
 ]
 environment = {LD_LIBRARY_PATH="/project/scip/SCIPOptSuite-8.0.3-Linux/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scip/SCIPOptSuite-8.0.3-Linux"}
