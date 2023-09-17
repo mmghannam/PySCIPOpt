@@ -9,7 +9,7 @@ before-all = [
   "cd scip",
   "mkdir build",
   "cd build",
-  "cmake ..",
+  "cmake .. -DCMAKE_INSTALL_PREFIX=/project/scip/build",
   "make -j",
 ]
 environment = {LD_LIBRARY_PATH="/project/scip/build/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scip/build"}
@@ -23,7 +23,7 @@ before-all = [
   "cd scip",
   "mkdir build",
   "cd build",
-  "cmake ..",
+  "cmake .. -DCMAKE_INSTALL_PREFIX=/project/scip/build",
   "make -j",
 ]
 environment = {LD_LIBRARY_PATH="/project/scip/build/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scip/build"}
