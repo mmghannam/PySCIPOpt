@@ -13,6 +13,7 @@ before-all = [
   "pwd",
   "ls",
   "make -j",
+  "make install INSTALLDIR=/project/scipopt/build",
 ]
 environment = {LD_LIBRARY_PATH="/project/scipopt/build/scip/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scipopt/build/scip"}
 build-frontend = "build"
@@ -27,6 +28,7 @@ before-all = [
   "cd build",
   "cmake .. -DCMAKE_INSTALL_PREFIX=/project/scipopt/build",
   "make -j",
+  "make install INSTALLDIR=/project/scipopt/install",
 ]
 environment = {LD_LIBRARY_PATH="/project/scipopt/build/scip/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scipopt/build/scip"}
 build-frontend = "build"
