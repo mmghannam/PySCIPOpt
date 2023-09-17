@@ -29,16 +29,28 @@ environment = {PATH="/project/scip/install/bin:$PATH", LD_LIBRARY_PATH="/project
 build-frontend = "build"
 skip = "*-musllinux*"
 
-# [tool.cibuildwheel.macos]
-# before-all = [
-#   "brew install git",
-#   "git clone --recursive https://github.com/scipopt/ScipBaseSuite.git scipopt",
-#   "cd scipopt",
-#   "mkdir build",
-#   "cd build",
-#   "cmake .. -DCMAKE_INSTALL_PREFIX=/project/scipopt/build",
-#   "make -j",
-#   "make install INSTALLDIR=/project/scipopt/install",
-# ]
-# environment = {LD_LIBRARY_PATH="/project/scipopt/build/scip/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scipopt/build/scip"}
-# build-frontend = "build"
+[tool.cibuildwheel.macos]
+before-all = [
+"brew install git cmake",
+"git clone https://github.com/scipopt/scip.git",
+"cd scip",
+"git checkout v80-bugfix",
+
+"git clone https://github.com/scipopt/soplex.git",
+"cd soplex",
+"git checkout bugfix-60",
+"mkdir build",
+"cd build",
+"cmake ..",
+"make -j",
+"cd ../..",
+
+"mkdir build",
+"cd build",
+"cmake .. -DAUTOBUILD=ON -DSOPLEX_DIR=soplex/build -DCMAKE_INSTALL_PREFIX=../install",
+"make -j",
+"make install",
+# "cp -r /project/scip/install/lib64 /project/scip/install/lib",
+]
+environment = {PATH="/project/scip/install/bin:$PATH", LD_LIBRARY_PATH="/project/scip/install/lib/:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scip/install/"}
+build-frontend = "build"

@@ -22,10 +22,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
-            arch: x86_64
-          # - os: macos-latest
+          # - os: ubuntu-latest
           #   arch: x86_64
+          - os: macos-latest
+            arch: x86_64
     env:
       CIBW_ARCHS: ${{ matrix.arch }}
     steps:
