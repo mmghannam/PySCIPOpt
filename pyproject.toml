@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [tool.cibuildwheel.linux]
 before-all = [
   "(apt-get update && apt-get install -y git) || yum install -y git || brew install git",
-  "git clone --recursive git@github.com:scipopt/ScipBaseSuite.git scip",
+  "git clone --recursive https://github.com/scipopt/ScipBaseSuite.git scip",
   "cd scip",
   "mkdir build",
   "cd build",
@@ -19,7 +19,7 @@ build-frontend = "build"
 [tool.cibuildwheel.macos]
 before-all = [
   "brew install git",
-  "git clone --recursive git@github.com:scipopt/ScipBaseSuite.git scip",
+  "git clone --recursive https://github.com/scipopt/ScipBaseSuite.git scip",
   "cd scip",
   "mkdir build",
   "cd build",
