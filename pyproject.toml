@@ -23,8 +23,9 @@ before-all = [
 "cmake .. -DAUTOBUILD=ON -DSOPLEX_DIR=soplex/build -DCMAKE_INSTALL_PREFIX=../install",
 "make -j",
 "make install",
+"ls -l ../install/lib",
 ]
-environment = {LD_LIBRARY_PATH="/project/scip/install/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scip/install/"}
+environment = {PATH="$(pwd)/scip/bin:$PATH", LD_LIBRARY_PATH="$(pwd)/scip/install/lib/:$LD_LIBRARY_PATH", SCIPOPTDIR="$(pwd)/scip/install/"}
 build-frontend = "build"
 
 
