@@ -5,27 +5,28 @@ build-backend = "setuptools.build_meta"
 [tool.cibuildwheel.linux]
 before-all = [
   "(apt-get update && apt-get install -y git) || yum install -y git || brew install git",
-  "git clone --recursive https://github.com/scipopt/ScipBaseSuite.git scip",
-  "cd scip",
+  "git clone --recursive https://github.com/scipopt/ScipBaseSuite.git scipopt",
+  "cd scipopt",
   "mkdir build",
   "cd build",
-  "cmake .. -DCMAKE_INSTALL_PREFIX=/project/scip/build",
+  "cmake .. -DCMAKE_INSTALL_PREFIX=/project/scipopt/build",
   "pwd",
-  # "make -j",
+  "ls",
+  "make -j",
 ]
-environment = {LD_LIBRARY_PATH="/project/scip/build/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scip/build"}
+environment = {LD_LIBRARY_PATH="/project/scipopt/build/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scipopt/build"}
 build-frontend = "build"
 
 
 [tool.cibuildwheel.macos]
 before-all = [
   "brew install git",
-  "git clone --recursive https://github.com/scipopt/ScipBaseSuite.git scip",
-  "cd scip",
+  "git clone --recursive https://github.com/scipopt/ScipBaseSuite.git scipopt",
+  "cd scipopt",
   "mkdir build",
   "cd build",
-  "cmake .. -DCMAKE_INSTALL_PREFIX=/project/scip/build",
+  "cmake .. -DCMAKE_INSTALL_PREFIX=/project/scipopt/build",
   "make -j",
 ]
-environment = {LD_LIBRARY_PATH="/project/scip/build/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scip/build"}
+environment = {LD_LIBRARY_PATH="/project/scipopt/build/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scipopt/build"}
 build-frontend = "build"
