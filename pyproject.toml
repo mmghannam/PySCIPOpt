@@ -4,8 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.cibuildwheel.linux]
 before-all = [
-"apt-get update",
-"apt-get install -y cmake g++ git clang",
+"(apt-get update && apt-get install -y cmake g++ git clang) || yum install -y cmake g++ git clang",
 "git clone https://github.com/scipopt/scip.git",
 "cd scip",
 "git checkout v80-bugfix",
