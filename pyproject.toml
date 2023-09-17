@@ -2,16 +2,30 @@
 requires = ['setuptools', 'cython <3, >=0.21']
 build-backend = "setuptools.build_meta"
 
-[tool.cibuildwheel.linux]
+# [tool.cibuildwheel.linux]
+# before-all = [
+#   "(apt-get update && apt-get install -y wget) || yum install -y wget || brew install wget",
+#   "mkdir -p scip && cd scip && wget https://scipopt.org/download/release/SCIPOptSuite-8.0.3-Linux-debian.sh && chmod 700 * && echo \"y\" | ./*.sh && rm *.sh"
+# ]
+# environment = {LD_LIBRARY_PATH="/project/scip/SCIPOptSuite-8.0.3-Linux/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scip/SCIPOptSuite-8.0.3-Linux"}
+# build-frontend = "build"
+# # OneTBB, as of version 2021.8.0, does not build on manylinux2014 - https://github.com/oneapi-src/oneTBB/issues/950
+# # And manylinux_2_24 is EOL - https://github.com/pypa/manylinux#docker-images
+# manylinux-x86_64-image = "manylinux_2_28"
+# # There is no manylinux_2_28 for i686
+# # Until we have alpine - https://github.com/sagemath/sage/issues/33083
+# skip = "*-musllinux*"
+
+
+[tool.cibuildwheel.macos]
 before-all = [
-  "(apt-get update && apt-get install -y wget) || yum install -y wget || brew install wget",
-  "mkdir -p scip && cd scip && wget https://scipopt.org/download/release/SCIPOptSuite-8.0.3-Linux-debian.sh && chmod 700 * && echo \"y\" | ./*.sh && rm *.sh"
+  "brew install git",
+  "git clone --recursive git@github.com:scipopt/ScipBaseSuite.git scip",
+  "cd scip",
+  "mkdir build",
+  "cd build",
+  "cmake ..",
+  "make -j",
 ]
-environment = {LD_LIBRARY_PATH="/project/scip/SCIPOptSuite-8.0.3-Linux/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scip/SCIPOptSuite-8.0.3-Linux"}
+environment = {LD_LIBRARY_PATH="/project/scip/build/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="/project/scip/build"}
 build-frontend = "build"
-# OneTBB, as of version 2021.8.0, does not build on manylinux2014 - https://github.com/oneapi-src/oneTBB/issues/950
-# And manylinux_2_24 is EOL - https://github.com/pypa/manylinux#docker-images
-manylinux-x86_64-image = "manylinux_2_24"
-# There is no manylinux_2_28 for i686
-# Until we have alpine - https://github.com/sagemath/sage/issues/33083
-skip = "*-musllinux*"
