@@ -51,5 +51,5 @@ before-all = [
 "make -j",
 "make install",
 ]
-environment = {PATH="$(pwd)/scip/install/bin:$PATH", DYLD_LIBRARY_PATH="$(pwd)/scip/install/lib/:$DYLD_LIBRARY_PATH", SCIPOPTDIR="$(pwd)/scip/install/"}
+environment = {PATH="$(pwd)/scip/install/bin:$PATH", DYLD_LIBRARY_PATH="$(pwd)/scip/install/lib:$DYLD_LIBRARY_PATH", LD_LIBRARY_PATH="$(pwd)/scip/install/lib:$LD_LIBRARY_PATH", SCIPOPTDIR="$(pwd)/scip/install/"}
 build-frontend = "build"
